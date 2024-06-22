@@ -1,5 +1,6 @@
 package org.keyin.S4Sprint1.Aircraft;
 import org.keyin.S4Sprint1.Airports.Airports;
+import org.keyin.S4Sprint1.Passengers.Passengers;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -64,4 +65,41 @@ public class AircraftService {
         Aircraft aircraft = aircraftMap.get(id);
         aircraft.deleteAirport(airportId);
     }
+
+    /* Setting up methods for getting seating and capacity of aircraft*/
+
+    public int getSeating(Long id) {
+        Aircraft aircraft = aircraftMap.get(id);
+        return aircraft.getSeating();
+    }
+
+    public void setSeating(Long id, int seating) {
+        Aircraft aircraft = aircraftMap.get(id);
+        aircraft.setSeating(seating);
+    }
+
+    public int getCapacity(Long id) {
+        Aircraft aircraft = aircraftMap.get(id);
+        return aircraft.getCapacity();
+    }
+
+    public void setCapacity(Long id, int capacity) {
+        Aircraft aircraft = aircraftMap.get(id);
+        aircraft.setCapacity(capacity);
+    }
+
+    /* Methods for allowing passengers to be added to a craft based on the ID*/
+
+    public Aircraft addPassengerToAircraft(Long id, Passengers passenger) {
+        Aircraft aircraft = aircraftMap.get(id);
+        aircraft.addPassenger(passenger);
+        return aircraft;
+    }
+
+    public void deletePassengerFromAircraft(Long aircraftId, Long passengerId) {
+        Aircraft aircraft = aircraftMap.get(aircraftId);
+        aircraft.deletePassenger(passengerId);
+    }
+
+
 }
