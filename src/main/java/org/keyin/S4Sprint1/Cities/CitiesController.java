@@ -1,5 +1,7 @@
 package org.keyin.S4Sprint1.Cities;
 
+import org.keyin.S4Sprint1.Airports.Airports;
+//import org.keyin.S4Sprint1.Passengers.Passenger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,5 +47,17 @@ public class CitiesController {
     public void deleteCity(@PathVariable Long id) {
         citiesService.deleteCity(id);
     }
+
+    // Endpoint to add an airport to a city
+    @PostMapping("/{cityId}/airports")
+    public Cities addAirportToCity(@PathVariable Long cityId, @RequestBody Airports airport) {
+        return citiesService.addAirportToCity(cityId, airport);
+    }
+
+//    // Endpoint to add a passenger to a city
+//    @PostMapping("/{cityId}/passengers")
+//    public Cities addPassengerToCity(@PathVariable Long cityId, @RequestBody Passenger passenger) {
+//        return citiesService.addPassengerToCity(cityId, passenger);
+//    }
 }
 
