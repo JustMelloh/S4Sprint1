@@ -3,6 +3,7 @@
 package org.keyin.S4Sprint1.Aircraft;
 
 
+import org.keyin.S4Sprint1.Airports.Airports;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,5 +48,24 @@ public class AircraftController {
         public void deleteAircraft(@PathVariable Long id) {
             aircraftService.deleteAircraft(id);
         }
+
+        /* Adding an airport to a specific Aircraft*/
+
+    @PostMapping("/{id}/airports")
+    public Aircraft addAirportToAircraft(@PathVariable Long id, @RequestBody Airports airports) {
+        return aircraftService.addAirportToAircraft(id, airports);
+    }
+
+    /* GET all airports for a specific aircraft*/
+    @GetMapping("/{id}/airports")
+    public List<Airports> getAirportsForAircraft(@PathVariable Long id) {
+        return aircraftService.getAirportsForAircraft(id);
+    }
+
+    /* DELETE an airport from a specific aircraft*/
+    @DeleteMapping("/{id}/airports/{airportId}")
+    public void deleteAirportFromAircraft(@PathVariable Long id, @PathVariable Long airportId) {
+        aircraftService.deleteAirportFromAircraft(id, airportId);
+    }
 
 }
