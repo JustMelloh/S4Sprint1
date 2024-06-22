@@ -6,10 +6,12 @@ package org.keyin.S4Sprint1.Aircraft;
 import org.keyin.S4Sprint1.Airports.Airports;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.keyin.S4Sprint1.Passengers.Passengers;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/aircraft")
 public class AircraftController {
 
         private final AircraftService aircraftService;
@@ -66,6 +68,31 @@ public class AircraftController {
     @DeleteMapping("/{id}/airports/{airportId}")
     public void deleteAirportFromAircraft(@PathVariable Long id, @PathVariable Long airportId) {
         aircraftService.deleteAirportFromAircraft(id, airportId);
+    }
+
+    @GetMapping("/{id}/seating")
+    public int getSeating(@PathVariable Long id) {
+        return aircraftService.getSeating(id);
+    }
+
+    @PutMapping("/{id}/seating/{seating}")
+    public void setSeating(@PathVariable Long id, @PathVariable int seating) {
+        aircraftService.setSeating(id, seating);
+    }
+
+    @GetMapping("/{id}/capacity")
+    public int getCapacity(@PathVariable Long id) {
+        return aircraftService.getCapacity(id);
+    }
+
+    @PutMapping("/{id}/capacity")
+    public void setCapacity(@PathVariable Long id, @RequestBody int capacity) {
+        aircraftService.setCapacity(id, capacity);
+    }
+
+    @PostMapping("/{id}/passengers")
+    public Aircraft addPassengerToAircraft(@PathVariable Long id, @RequestBody Passengers passengers) {
+        return aircraftService.addPassengerToAircraft(id, passengers);
     }
 
 }

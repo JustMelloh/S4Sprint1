@@ -6,17 +6,20 @@
 package org.keyin.S4Sprint1.Aircraft;
 
 import org.keyin.S4Sprint1.Airports.Airports;
+import org.keyin.S4Sprint1.Passengers.Passengers;
+import org.keyin.S4Sprint1.Cities.Cities;
 
 import java.util.List;
 
 public class Aircraft {
     // Variables representing the properties of an Aircraft
     private int aircraftID;
-    private String city;
+    private Cities city;
     private int seating;
+    private int capacity;
     private List<Airports> airports;
     private int passengers;
-
+    private List<Passengers> passengersList;
     /**
      * Default constructor for the Aircraft entity.
      */
@@ -30,10 +33,13 @@ public class Aircraft {
      * @param seating The seating capacity of the aircraft.
      * @param passengers The number of passengers in the aircraft.
      */
-    public Aircraft(Long aircraftID, String city, int seating, int passengers) {
+    public Aircraft(Long aircraftID, Cities city, int seating, List<Passengers> passengersList, int capacity) {
         this.aircraftID = Math.toIntExact(aircraftID);
         this.city = city;
         this.seating = seating;
+        this.passengersList = passengersList;
+        this.capacity = capacity;
+
     }
 
     // Getters and Setters for the Aircraft entity
@@ -55,15 +61,26 @@ public class Aircraft {
     /**
      * @return The city where the aircraft is located.
      */
-    public String getCity() {
+    public Cities getCity() {
         return city;
     }
 
     /**
      * @param city The city to set for the aircraft.
      */
-    public void setCity(String city) {
+    public void setCity(Cities city) {
         this.city = city;
+    }
+
+    /* Passenger Relational Methods */
+
+    /**
+     * Removes a passenger from the aircraft.
+     *
+     * @param passengerId The ID of the passenger to remove.
+     */
+    public void deletePassenger(Long passengerId) {
+        passengersList.removeIf(passenger -> passenger.getId().equals(passengerId));
     }
 
     /**
@@ -83,16 +100,29 @@ public class Aircraft {
     /**
      * @return The number of passengers in the aircraft.
      */
-    public int getPassengers() {
-        return passengers;
+    public int getCapacity() {
+        return capacity;
     }
 
     /**
-     * @param passengers The number of passengers to set for the aircraft.
+     * @param capacity The number of passengers to set for the aircraft.
      */
-    public void setPassengers(int passengers) {
-        this.passengers = passengers;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
+
+
+    /* Methods for Passengers*/
+    public void addPassenger(Passengers passenger) {
+        passengersList.add(passenger);
+    }
+
+    public List<Passengers> getPassengers() {
+        return passengersList;
+    }
+
+
+
 
     // Methods for the Service class
 
