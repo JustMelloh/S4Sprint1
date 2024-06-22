@@ -9,6 +9,7 @@ import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Passengers.Passengers;
 import org.keyin.S4Sprint1.Cities.Cities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Aircraft {
@@ -18,8 +19,7 @@ public class Aircraft {
     private int seating;
     private int capacity;
     private List<Airports> airports;
-    private int passengers;
-    private List<Passengers> passengersList;
+    private List<Passengers> passengersList = new ArrayList<>();
     /**
      * Default constructor for the Aircraft entity.
      */
@@ -31,7 +31,7 @@ public class Aircraft {
      * @param aircraftID The ID of the aircraft.
      * @param city The city where the aircraft is located.
      * @param seating The seating capacity of the aircraft.
-     * @param passengers The number of passengers in the aircraft.
+     * @param passengersList The number of passengers in the aircraft.
      */
     public Aircraft(Long aircraftID, Cities city, int seating, List<Passengers> passengersList, int capacity) {
         this.aircraftID = Math.toIntExact(aircraftID);
@@ -159,7 +159,7 @@ public class Aircraft {
                 "aircraftID=" + aircraftID +
                 ", city='" + city + '\'' +
                 ", seating=" + seating +
-                ", passengers=" + passengers +
+                ", passengers=" + passengersList +
                 '}';
     }
 }
