@@ -1,7 +1,7 @@
 package org.keyin.S4Sprint1.Cities;
 
 import org.keyin.S4Sprint1.Airports.Airports;
-//import org.keyin.S4Sprint1.Passengers.Passenger;
+import org.keyin.S4Sprint1.Passengers.Passengers;
 
 import java.util.List;
 
@@ -11,19 +11,18 @@ public class Cities {
     private String state;
     private int population;
     private List<Airports> airports;
-//    private List<Passenger> passengers;
+    private List<Passengers> passengers;
 
     // Constructor, getters, and setters
     public Cities() {}
 
-    public Cities(Long id, String name, String state, int population, List<Airports> airports){
-//        List<Passenger> passengers) {
+    public Cities(Long id, String name, String state, int population, List<Airports> airports, List<Passengers> passengers) {
         this.id = id;
         this.name = name;
         this.state = state;
         this.population = population;
         this.airports = airports;
-//        this.passengers = passengers;
+        this.passengers = passengers;
     }
 
     public Long getId() {
@@ -66,11 +65,11 @@ public class Cities {
         this.airports = airports;
     }
 
-//    public List<Passenger> getPassengers() {
-//        return passengers;
-//    }
-//
-//    public void setPassengers(List<Passenger> passengers) {
-//        this.passengers = passengers;
-//    }
+    public List<Passengers> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passengers> passengers) {
+        this.passengers = passengers;
+    }
 }

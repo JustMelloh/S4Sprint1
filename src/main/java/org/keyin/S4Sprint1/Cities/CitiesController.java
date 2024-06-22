@@ -1,7 +1,7 @@
 package org.keyin.S4Sprint1.Cities;
 
 import org.keyin.S4Sprint1.Airports.Airports;
-//import org.keyin.S4Sprint1.Passengers.Passenger;
+import org.keyin.S4Sprint1.Passengers.Passengers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,10 +54,10 @@ public class CitiesController {
         return citiesService.addAirportToCity(cityId, airport);
     }
 
-//    // Endpoint to add a passenger to a city
-//    @PostMapping("/{cityId}/passengers")
-//    public Cities addPassengerToCity(@PathVariable Long cityId, @RequestBody Passenger passenger) {
-//        return citiesService.addPassengerToCity(cityId, passenger);
-//    }
+    // Endpoint to add a passenger to a city
+    @PostMapping("/{cityId}/passengers")
+    public Cities addPassengerToCity(@PathVariable Long cityId, @RequestBody Passengers passenger) {
+        return citiesService.addPassengerToCity(cityId, passenger);
+    }
 }
 

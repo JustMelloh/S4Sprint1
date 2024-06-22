@@ -1,7 +1,8 @@
 package org.keyin.S4Sprint1.Cities;
 
 import org.keyin.S4Sprint1.Airports.Airports;
-//import org.keyin.S4Sprint1.Passengers.Passenger;
+import org.keyin.S4Sprint1.Passengers.Passengers;
+import org.keyin.S4Sprint1.Passengers.Passengers;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -55,15 +56,15 @@ public class CitiesService {
         return city;
     }
 
-    // Method to add a passenger to a city
-//    public Cities addPassengerToCity(Long cityId, Passenger passenger) {
-//        Cities city = citiesMap.get(cityId);
-//        if (city != null) {
-//            List<Passenger> passengers = city.getPassengers();
-//            passengers.add(passenger);
-//            city.setPassengers(passengers);
-//        }
-//        return city;
-//    }
+//     Method to add a passenger to a city
+    public Cities addPassengerToCity(Long cityId, Passengers passenger) {
+        Cities city = citiesMap.get(cityId);
+        if (city != null) {
+            List<Passengers> passengers = city.getPassengers();
+            passengers.add((Passengers) passengers);
+            city.setPassengers(passengers);
+        }
+        return city;
+    }
 }
 
