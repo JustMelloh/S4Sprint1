@@ -16,17 +16,17 @@ public class AircraftTest {
 
     @Test
     void testAircraftConstructorAndGetters() {
-        // Arrange
+
         Long aircraftID = 1L;
-        Cities city = new Cities(); // Replace with actual Cities constructor if available
+        Cities city = new Cities();
         int seating = 150;
         List<Passengers> passengersList = new ArrayList<>();
         int capacity = 200;
 
-        // Act
+
         Aircraft aircraft = new Aircraft(aircraftID, city, seating, passengersList, capacity);
 
-        // Assert
+
         assertEquals(aircraftID, aircraft.getAircraftID());
         assertEquals(city, aircraft.getCity());
         assertEquals(seating, aircraft.getSeating());
@@ -36,20 +36,18 @@ public class AircraftTest {
 
     @Test
     void testAircraftSetters() {
-        // Arrange
+
         Aircraft aircraft = new Aircraft();
         Long aircraftID = 1L;
-        Cities city = new Cities(); // Replace with actual Cities constructor if available
+        Cities city = new Cities();
         int seating = 150;
         int capacity = 200;
 
-        // Act
         aircraft.setAircraftID(aircraftID);
         aircraft.setCity(city);
         aircraft.setSeating(seating);
         aircraft.setCapacity(capacity);
 
-        // Assert
         assertEquals(aircraftID, aircraft.getAircraftID());
         assertEquals(city, aircraft.getCity());
         assertEquals(seating, aircraft.getSeating());
@@ -60,9 +58,9 @@ public class AircraftTest {
 
     @Test
     void testAddAndDeletePassenger() {
-        // Arrange
+
         Aircraft aircraft = new Aircraft();
-        Passengers passenger = new Passengers(); // Replace
+        Passengers passenger = new Passengers();
     }
 
 
