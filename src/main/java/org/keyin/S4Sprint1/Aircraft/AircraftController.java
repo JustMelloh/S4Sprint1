@@ -7,6 +7,7 @@ import org.keyin.S4Sprint1.Airports.Airports;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.keyin.S4Sprint1.Passengers.Passengers;
+import org.keyin.S4Sprint1.Passengers.PassengersService;
 
 import java.util.List;
 
@@ -15,10 +16,12 @@ import java.util.List;
 public class AircraftController {
 
         private final AircraftService aircraftService;
+        private final PassengersService PassengersService;
 
         @Autowired
-        public AircraftController(AircraftService aircraftService) {
+        public AircraftController(AircraftService aircraftService, PassengersService PassengersService) {
             this.aircraftService = aircraftService;
+            this.PassengersService = PassengersService;
         }
 
         /* Endpoint to receive all aircraft*/
@@ -90,8 +93,10 @@ public class AircraftController {
         aircraftService.setCapacity(id, capacity);
     }
 
-    @PostMapping("/{id}/passengers")
+    @PutMapping("/{id}/passengers")
     public Aircraft addPassengerToAircraft(@PathVariable Long id, @RequestBody Passengers passengers) {
+        PassengersService.addPassenger(passengers);
+        PassengersService.addAircraftToPassenger(passengers, id);
         return aircraftService.addPassengerToAircraft(id, passengers);
     }
 
