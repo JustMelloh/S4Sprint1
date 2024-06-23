@@ -1,6 +1,7 @@
 package org.keyin.S4Sprint1.Passengers;
 import org.springframework.stereotype.Service;
 import java.util.*;
+import org.keyin.S4Sprint1.Aircraft.Aircraft;
 
 @Service
 public class PassengersService {
@@ -41,5 +42,19 @@ public class PassengersService {
     public void deletePassenger(Long id) {
         allPassengers.remove(id);
         System.out.println("Passenger deleted successfully");
+    }
+
+    public void addAircraftToPassenger(Passengers passengers, Long aircraft) {
+        passengers.addAircraft(aircraft);
+    }
+
+    public List<Aircraft> getAircraftForPassenger(Passengers passengers) {
+        List<Aircraft> aircrafts = new ArrayList<>();
+        for (Long aircraftId : passengers.getAircrafts()) {
+            Aircraft aircraft = new Aircraft();
+            aircraft.setAircraftID(aircraftId);
+            aircrafts.add(aircraft);
+        }
+        return aircrafts;
     }
 }

@@ -1,16 +1,21 @@
 package org.keyin.S4Sprint1.Passengers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Passengers {
     private Long id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private List<Long> aircrafts = new ArrayList<>();
 
-    public Passengers(Long id, String firstName, String lastName, String phoneNumber) {
+    public Passengers(Long id, String firstName, String lastName, String phoneNumber, List<Long> aircrafts) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.aircrafts = aircrafts;
     }
 
     public Passengers() {
@@ -49,5 +54,12 @@ public class Passengers {
         this.phoneNumber = phoneNumber;
     }
 
+    public List<Long> getAircrafts() {
+        return aircrafts;
+    }
+
+    public void addAircraft(Long aircraft) {
+        aircrafts.add(aircraft);
+    }
     
 }
