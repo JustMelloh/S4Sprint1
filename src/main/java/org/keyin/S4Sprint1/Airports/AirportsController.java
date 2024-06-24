@@ -80,6 +80,18 @@ public class AirportsController {
      * @param airport The airport to be added to the aircraft.
      * @return The updated aircraft.
      */
+
+    @GetMapping("/aircraft/{id}/airports")
+    public List<Airports> getAirportsForAircraft(@PathVariable Long id){
+        return airportsService.getAirportsForAircraft(id);
+    }
+
+    @DeleteMapping("/aircraft/{id}/airports/{airportId}")
+    public void deleteAirportFromAircraft(@PathVariable Long id, @PathVariable Long airportId){
+        airportsService.deleteAirportFromAircraft(id, airportId);
+    }
+
+
     @PostMapping("/{id}/airports")
     public Airports addAirportToAircraft(@PathVariable Long id, @RequestBody Airports airport){
         return airportsService.addAirportToAircraft(id, airport);
