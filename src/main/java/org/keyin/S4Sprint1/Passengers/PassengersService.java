@@ -3,6 +3,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
 import org.keyin.S4Sprint1.Airports.*;
+import org.keyin.S4Sprint1.Cities.Cities;
 
 @Service
 public class PassengersService {
@@ -74,5 +75,13 @@ public class PassengersService {
 
     public void deleteAirportFromPassenger(Passengers passengers, Airports airport) {
         passengers.getAirports().remove(airport);
+    }
+
+    public Cities getCityForPassenger(Passengers passengers) {
+        return passengers.getCity();
+    }
+
+    public void addCityToPassenger(Passengers passengers, Cities city) {
+        passengers.setCity(city);
     }
 }

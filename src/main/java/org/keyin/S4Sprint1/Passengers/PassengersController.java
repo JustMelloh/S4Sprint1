@@ -7,6 +7,7 @@ import org.keyin.S4Sprint1.Aircraft.Aircraft;
 import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Airports.AirportsService;
 import org.keyin.S4Sprint1.Passengers.*;
+import org.keyin.S4Sprint1.Cities.Cities;
 
 @RestController
 @RequestMapping("/api/passengers")
@@ -80,5 +81,17 @@ public class PassengersController {
     public void deleteAirportFromPassenger(@PathVariable Long id, @PathVariable Long airportId) {
         Passengers passenger = passengersService.getPassengerById(id);
         passengersService.deleteAirportFromPassenger(passenger, AirportsService.getAirportById(airportId));
+    }
+
+    @GetMapping("/{id}/cities")
+    public Cities getCity(@PathVariable Long id) {
+        Passengers passenger = passengersService.getPassengerById(id);
+        return passengersService.getCityForPassenger(passenger);
+    }
+
+    @PostMapping("/{id}/cities")
+    public void setCity(@PathVariable Long id, @RequestBody Cities city) {
+        Passengers passenger = passengersService.getPassengerById(id);
+        passenger.setCity(city);
     }
 }
