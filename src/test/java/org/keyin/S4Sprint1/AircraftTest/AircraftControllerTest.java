@@ -47,5 +47,5 @@ public class AircraftControllerTest {
         System.out.println("Get all aircraft test passed" + "\n" + "Aircraft 1: " + aircraft1 + "\n" + "Aircraft 2: " + aircraft2);
     }
 
-    // Add more test methods for other methods in the AircraftController class...
+
 }
