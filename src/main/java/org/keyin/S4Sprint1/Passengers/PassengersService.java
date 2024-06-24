@@ -2,6 +2,7 @@ package org.keyin.S4Sprint1.Passengers;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
+import org.keyin.S4Sprint1.Airports.*;
 
 @Service
 public class PassengersService {
@@ -56,5 +57,22 @@ public class PassengersService {
             aircrafts.add(aircraft);
         }
         return aircrafts;
+    }
+
+    public List<Airports> addAirportToPassenger(Passengers passengers, Airports airports) {
+        passengers.addAirport(airports);
+        return passengers.getAirports();
+    }
+
+    public List<Airports> getAirportsForPassenger(Passengers passengers) {
+        return passengers.getAirports();
+    }
+
+    public void deleteAircraftFromPassenger(Passengers passengers, Long aircraftId) {
+        passengers.getAircrafts().remove(aircraftId);
+    }
+
+    public void deleteAirportFromPassenger(Passengers passengers, Airports airport) {
+        passengers.getAirports().remove(airport);
     }
 }
