@@ -1,6 +1,7 @@
 package org.keyin.S4Sprint1.Airports;
 
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
+import org.keyin.S4Sprint1.Aircraft.AircraftService;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +19,11 @@ public class AirportsService {
      * A map to store airports with their IDs as keys.
      */
     private final Map<Long, Airports> airportsMap = new HashMap<>();
+    private final AircraftService aircraftService;
+
+    public AirportsService(AircraftService aircraftService) {
+        this.aircraftService = aircraftService;
+    }
 
     /**
      * This method returns all airports.
@@ -68,9 +74,30 @@ public class AirportsService {
      * @return The added airport.
      */
     public Airports addAirportToAircraft(Long id, Airports airport) {
-        Aircraft aircraft = new Aircraft();
+        Aircraft aircraft = aircraftService.getAircraftById(id);
         aircraft.addAirport(airport);
         return airport;
+    }
+
+    /**
+     * This method updates an existing airport.
+     * @param id The ID of the airport to be updated.
+     * @param airportId The updated airport.
+     * @throws IllegalArgumentException If the airport does not exist.
+     */
+    public void deleteAirportFromAircraft(Long id, Long airportId) {
+        Aircraft aircraft = aircraftService.getAircraftById(id);
+        aircraft.deleteAirport(airportId);
+    }
+
+    /**
+     * This method returns all airports for a specific aircraft.
+     * @param id The ID of the aircraft.
+     * @return A list of all airports for the specified aircraft.
+     */
+    public List<Airports> getAirportsForAircraft(Long id) {
+        Aircraft aircraft = aircraftService.getAircraftById(id);
+        return aircraft.getAirports();
     }
 
     /**
@@ -96,5 +123,6 @@ public class AirportsService {
     public boolean deleteAirport(Long id) {
         return airportsMap.remove(id) != null;
     }
+
 
 }
