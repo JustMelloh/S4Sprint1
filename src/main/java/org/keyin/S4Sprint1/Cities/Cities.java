@@ -1,10 +1,14 @@
 package org.keyin.S4Sprint1.Cities;
 
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude (JsonInclude.Include.NON_NULL)
+
 import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Passengers.Passengers;
 
 import java.util.List;
-
 public class Cities {
     private Long id;
     private String name;
