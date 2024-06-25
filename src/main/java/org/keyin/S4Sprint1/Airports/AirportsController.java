@@ -1,6 +1,10 @@
 package org.keyin.S4Sprint1.Airports;
 
+import org.keyin.S4Sprint1.Aircraft.Aircraft;
+import org.keyin.S4Sprint1.Cities.Cities;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -96,4 +100,5 @@ public class AirportsController {
     public Airports addAirportToAircraft(@PathVariable Long id, @RequestBody Airports airport){
         return airportsService.addAirportToAircraft(id, airport);
     }
+
 }

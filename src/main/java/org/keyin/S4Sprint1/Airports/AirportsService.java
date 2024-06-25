@@ -2,6 +2,7 @@ package org.keyin.S4Sprint1.Airports;
 
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
 import org.keyin.S4Sprint1.Aircraft.AircraftService;
+import org.keyin.S4Sprint1.Cities.Cities;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -125,4 +126,8 @@ public class AirportsService {
     }
 
 
+    public List<Cities> getCitiesForAirport(Long id) {
+        Airports airport = airportsMap.get(id);
+        return (List<Cities>) airport.getCity();
+    }
 }

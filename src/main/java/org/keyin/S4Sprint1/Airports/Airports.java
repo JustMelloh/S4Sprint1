@@ -10,8 +10,6 @@ public class Airports {
     private Cities city;
     private List<Aircraft> aircraft;
 
-    public Airports() {
-    }
 
     public Airports(int airportID, Cities city,  List<Aircraft>aircraft) {
         this.airportID = airportID;

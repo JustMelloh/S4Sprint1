@@ -162,5 +162,9 @@ public class Aircraft {
                 ", passengers=" + passengersList +
                 '}';
     }
+
+    public Object getCities() {
+        return city;
+    }
 }
 
