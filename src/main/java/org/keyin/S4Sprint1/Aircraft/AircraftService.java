@@ -1,5 +1,7 @@
 package org.keyin.S4Sprint1.Aircraft;
 import org.keyin.S4Sprint1.Airports.Airports;
+import org.keyin.S4Sprint1.Cities.Cities;
+import org.keyin.S4Sprint1.Cities.CitiesService;
 import org.keyin.S4Sprint1.Passengers.Passengers;
 import org.springframework.stereotype.Service;
 
@@ -102,4 +104,13 @@ public class AircraftService {
     }
 
 
+    public List<Passengers> getPassengersForAircraft(Long id) {
+        Aircraft aircraft = aircraftMap.get(id);
+        return aircraft.getPassengers();
+    }
+
+    public Object getCitiesForAircraft(Long aircraftId) {
+        Aircraft aircraft = aircraftMap.get(aircraftId);
+        return aircraft.getCities();
+    }
 }
