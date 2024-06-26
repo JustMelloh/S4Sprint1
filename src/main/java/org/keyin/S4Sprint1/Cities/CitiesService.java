@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class CitiesService {
@@ -65,6 +66,13 @@ public class CitiesService {
             city.setPassengers(passengers);
         }
         return city;
+    }
+
+    // Method to search cities by name
+    public List<Cities> searchCitiesByName(String name) {
+        return citiesMap.values().stream()
+                .filter(city -> city.getName().equalsIgnoreCase(name))
+                .collect(Collectors.toList());
     }
 }
 
