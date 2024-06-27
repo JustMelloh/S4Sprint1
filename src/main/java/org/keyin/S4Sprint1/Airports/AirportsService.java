@@ -46,7 +46,7 @@ public class AirportsService {
         return airportsMap.remove(id) != null;
     }
 
-    public Airports addAircraftToAirport(Integer id, Aircraft aircraft) {
+    public Airports addAircraftToAirport(int id, Aircraft aircraft) {
         Airports airport = airportsMap.get(id);
         if (airport != null) {
             List<Aircraft> aircraftList = airport.getAircraft();
@@ -55,7 +55,7 @@ public class AirportsService {
                 airport.setAircraft(aircraftList);
             }
             aircraftList.add(aircraft);
-
+            // Update the airport in the database
             airportsMap.put(id, airport);
         }
         return airport;

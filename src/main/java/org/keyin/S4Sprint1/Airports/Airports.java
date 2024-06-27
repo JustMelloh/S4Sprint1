@@ -3,8 +3,6 @@
 package org.keyin.S4Sprint1.Airports;
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
 import org.keyin.S4Sprint1.Cities.Cities;
-
-import java.util.ArrayList;
 import java.util.List;
 public class Airports {
 
@@ -46,8 +44,6 @@ public class Airports {
         this.aircraftID = aircraft;
     }
 
-
-
     @Override
     public String toString() {
         return "Airports{" +
@@ -55,12 +51,5 @@ public class Airports {
                 ", city='" + city + '\'' +
                 ", aircraftID=" + aircraftID +
                 '}';
-    }
-
-    public void addAircraft(Aircraft aircraft) {
-        if (this.aircraftID == null) {
-            this.aircraftID = new ArrayList<>();
-        }
-        this.aircraftID.add(aircraft);
     }
 }

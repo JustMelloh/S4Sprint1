@@ -1,8 +1,8 @@
 package org.keyin.S4Sprint1.Aircraft;
-
 import org.keyin.S4Sprint1.Airports.Airports;
-import org.keyin.S4Sprint1.Airports.AirportsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.keyin.S4Sprint1.Cities.Cities;
+import org.keyin.S4Sprint1.Cities.CitiesService;
+import org.keyin.S4Sprint1.Passengers.Passengers;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,9 +15,6 @@ public class AircraftService {
     /* Declaration of a HashMap that will be used to store AirCraft objects. */
     private final Map<Long, Aircraft> aircraftMap = new HashMap<>();
     private Long nextId = 1L;
-
-    @Autowired
-    private AirportsService airportsService;
 
     /* Retrieving all aircraft in airport*/
     public List<Aircraft> getAllAircraft() {
@@ -32,19 +29,9 @@ public class AircraftService {
 
     /* Adding an aircraft*/
 
-    public Aircraft addAircraft(Aircraft aircraft, Integer airportID, Airports airports) {
+    public Aircraft addAircraft(Aircraft aircraft) {
         aircraft.setAircraftID(nextId++);
         aircraftMap.put(aircraft.getAircraftID(), aircraft);
-
-        aircraft.addAirport(airports);
-
-
-        Airports airport = airportsService.getAirportById(airportID);
-        if (airport != null) {
-            airport.addAircraft(aircraft);
-            airportsService.updateAirport(airportID, airport);
-        }
-
         return aircraft;
     }
 
@@ -62,6 +49,13 @@ public class AircraftService {
         aircraftMap.remove(id);
     }
 
+    /* Adding an airport to a specific Aircraft*/
+
+    public Aircraft addAirportToAircraft(Long id, Airports airports) {
+        Aircraft aircraft = aircraftMap.get(id);
+        aircraft.addAirport(airports);
+        return aircraft;
+    }
 
 
     public List<Airports> getAirportsForAircraft(Long id) {
@@ -69,8 +63,54 @@ public class AircraftService {
         return aircraft.getAirports();
     }
 
-    public void deleteAirportFromAircraft(Long id, Long airportId) {
+    public void deleteAirportFromAircraft(Long id, int airportId) {
         Aircraft aircraft = aircraftMap.get(id);
         aircraft.deleteAirport(airportId);
+    }
+
+    /* Setting up methods for getting seating and capacity of aircraft*/
+
+    public int getSeating(Long id) {
+        Aircraft aircraft = aircraftMap.get(id);
+        return aircraft.getSeating();
+    }
+
+    public void setSeating(Long id, int seating) {
+        Aircraft aircraft = aircraftMap.get(id);
+        aircraft.setSeating(seating);
+    }
+
+    public int getCapacity(Long id) {
+        Aircraft aircraft = aircraftMap.get(id);
+        return aircraft.getCapacity();
+    }
+
+    public void setCapacity(Long id, int capacity) {
+        Aircraft aircraft = aircraftMap.get(id);
+        aircraft.setCapacity(capacity);
+    }
+
+    /* Methods for allowing passengers to be added to a craft based on the ID*/
+
+    public Aircraft addPassengerToAircraft(Long id, Passengers passenger) {
+        Aircraft aircraft = aircraftMap.get(id);
+        aircraft.addPassenger(passenger);
+        return aircraft;
+    }
+
+    public void deletePassengerFromAircraft(Long aircraftId, int passengerId) {
+        Aircraft aircraft = aircraftMap.get(aircraftId);
+        aircraft.deletePassenger(passengerId);
+    }
+
+
+    public List<Passengers> getPassengersForAircraft(Long id) {
+        Aircraft aircraft = aircraftMap.get(id);
+        return aircraft.getPassengers();
+    }
+
+    public Object getCitiesForAircraft(Long aircraftId) {
+        Aircraft aircraft = aircraftMap.get(aircraftId);
+        return aircraft.getCities();
     }
 }

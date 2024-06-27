@@ -6,17 +6,20 @@
 package org.keyin.S4Sprint1.Aircraft;
 
 import org.keyin.S4Sprint1.Airports.Airports;
+import org.keyin.S4Sprint1.Passengers.Passengers;
+import org.keyin.S4Sprint1.Cities.Cities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Aircraft {
     // Variables representing the properties of an Aircraft
-    private Long aircraftID;
-    private String city;
+    private int aircraftID;
+    private Cities city;
     private int seating;
-    private List<Airports> airports;
-    private int passengers;
-
+    private int capacity;
+    private List<Airports> airports = new ArrayList<>();
+    private List<Passengers> passengersList = new ArrayList<>();
     /**
      * Default constructor for the Aircraft entity.
      */
@@ -28,13 +31,15 @@ public class Aircraft {
      * @param aircraftID The ID of the aircraft.
      * @param city The city where the aircraft is located.
      * @param seating The seating capacity of the aircraft.
-     * @param passengers The number of passengers in the aircraft.
+     * @param passengersList The number of passengers in the aircraft.
      */
-    public Aircraft(Long aircraftID, String city, int seating, int passengers) {
-        this.aircraftID = aircraftID;
+    public Aircraft(Long aircraftID, Cities city, int seating, List<Passengers> passengersList, int capacity, List<Airports> airports) {
+        this.aircraftID = Math.toIntExact(aircraftID);
         this.city = city;
         this.seating = seating;
-        this.passengers = passengers;
+        this.passengersList = passengersList;
+        this.capacity = capacity;
+        this.airports = airports;
     }
 
     // Getters and Setters for the Aircraft entity
@@ -43,28 +48,39 @@ public class Aircraft {
      * @return The ID of the aircraft.
      */
     public Long getAircraftID() {
-        return aircraftID;
+        return (long) aircraftID;
     }
 
     /**
      * @param aircraftID The ID to set for the aircraft.
      */
     public void setAircraftID(Long aircraftID) {
-        this.aircraftID = aircraftID;
+        this.aircraftID = Math.toIntExact(aircraftID);
     }
 
     /**
      * @return The city where the aircraft is located.
      */
-    public String getCity() {
+    public Cities getCity() {
         return city;
     }
 
     /**
      * @param city The city to set for the aircraft.
      */
-    public void setCity(String city) {
+    public void setCity(Cities city) {
         this.city = city;
+    }
+
+    /* Passenger Relational Methods */
+
+    /**
+     * Removes a passenger from the aircraft.
+     *
+     * @param passengerId The ID of the passenger to remove.
+     */
+    public void deletePassenger(int passengerId) {
+        passengersList.removeIf(passenger -> passenger.getId() == passengerId);
     }
 
     /**
@@ -84,16 +100,29 @@ public class Aircraft {
     /**
      * @return The number of passengers in the aircraft.
      */
-    public int getPassengers() {
-        return passengers;
+    public int getCapacity() {
+        return capacity;
     }
 
     /**
-     * @param passengers The number of passengers to set for the aircraft.
+     * @param capacity The number of passengers to set for the aircraft.
      */
-    public void setPassengers(int passengers) {
-        this.passengers = passengers;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
+
+
+    /* Methods for Passengers*/
+    public void addPassenger(Passengers passenger) {
+        passengersList.add(passenger);
+    }
+
+    public List<Passengers> getPassengers() {
+        return passengersList;
+    }
+
+
+
 
     // Methods for the Service class
 
@@ -103,7 +132,6 @@ public class Aircraft {
      */
     public void addAirport(Airports airport) {
         airports.add(airport);
-
     }
 
     /**
@@ -113,16 +141,13 @@ public class Aircraft {
         return airports;
     }
 
-    public void setAirports(List<Airports> airports) {
-        this.airports = airports;
-    }
     /**
      * This method removes an airport from the aircraft's list of airports.
      * It takes the ID of the airport and removes the corresponding Airports object from the list.
      * @param airportId The ID of the airport to be removed.
      */
-    public void deleteAirport(Long airportId) {
-        airports.removeIf(airport -> airport.getAirportID().longValue() == airportId);
+    public void deleteAirport(int airportId) {
+        airports.removeIf(airport -> airport.getAirportID() == airportId);
     }
 
     /**
@@ -134,8 +159,12 @@ public class Aircraft {
                 "aircraftID=" + aircraftID +
                 ", city='" + city + '\'' +
                 ", seating=" + seating +
-                ", passengers=" + passengers +
+                ", passengers=" + passengersList +
                 '}';
+    }
+
+    public Object getCities() {
+        return city;
     }
 }
 

@@ -2,10 +2,16 @@
 
 package org.keyin.S4Sprint1.Aircraft;
 
-import org.keyin.S4Sprint1.Airports.AirportsService;
+
 import org.keyin.S4Sprint1.Airports.Airports;
+import org.keyin.S4Sprint1.Airports.AirportsService;
+import org.keyin.S4Sprint1.Cities.Cities;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.keyin.S4Sprint1.Passengers.Passengers;
+import org.keyin.S4Sprint1.Passengers.PassengersService;
 
 import java.util.List;
 
@@ -13,12 +19,16 @@ import java.util.List;
 @RequestMapping("/api/aircraft")
 public class AircraftController {
 
-        private final AircraftService aircraftService;
+    private final AircraftService aircraftService;
+    private final PassengersService passengersService;
+    private final AirportsService airportsService;
 
-        @Autowired
-        public AircraftController(AircraftService aircraftService) {
-            this.aircraftService = aircraftService;
-        }
+    @Autowired
+    public AircraftController(AircraftService aircraftService, PassengersService passengersService, AirportsService airportsService) {
+        this.aircraftService = aircraftService;
+        this.passengersService = passengersService;
+        this.airportsService = airportsService;
+    }
 
         /* Endpoint to receive all aircraft*/
         @GetMapping
@@ -33,10 +43,11 @@ public class AircraftController {
         }
 
         /* Endpoint to add an aircraft*/
-        @PostMapping("/{airportID}/add")
-        public Aircraft addAircraft(@PathVariable Airports airports, @PathVariable Integer airportID, @RequestBody Aircraft aircraft) {
-            return aircraftService.addAircraft(aircraft, airportID, airports);
-
+        @PostMapping("/{id}")
+        public Aircraft addAircraft(@PathVariable int id, @RequestBody Aircraft aircraft) {
+            Airports airports = airportsService.getAirportById(id);
+            aircraft.addAirport(airports);
+            return aircraftService.addAircraft(aircraft);
         }
 
         /* Endpoint that updates to existing aircraft*/
@@ -53,13 +64,9 @@ public class AircraftController {
 
         /* Adding an airport to a specific Aircraft*/
 
-    @PostMapping("/{id}/airports/addAircraft")
+    @PostMapping("/{id}/airports")
     public Aircraft addAirportToAircraft(@PathVariable Long id, @RequestBody Airports airports) {
-        Aircraft aircraft = aircraftService.getAircraftById(id);
-        if (aircraft == null) {
-            throw new IllegalArgumentException("Aircraft does not exist");
-        }
-        return aircraftService.addAircraft(aircraft, airports.getAirportID(), airports);
+        return aircraftService.addAirportToAircraft(id, airports);
     }
 
     /* GET all airports for a specific aircraft*/
@@ -70,8 +77,39 @@ public class AircraftController {
 
     /* DELETE an airport from a specific aircraft*/
     @DeleteMapping("/{id}/airports/{airportId}")
-    public void deleteAirportFromAircraft(@PathVariable Long id, @PathVariable Long airportId) {
+    public void deleteAirportFromAircraft(@PathVariable Long id, @PathVariable int airportId) {
         aircraftService.deleteAirportFromAircraft(id, airportId);
     }
 
-}
+    @GetMapping("/{id}/seating")
+    public int getSeating(@PathVariable Long id) {
+        return aircraftService.getSeating(id);
+    }
+
+    @PutMapping("/{id}/seating/{seating}")
+    public void setSeating(@PathVariable Long id, @PathVariable int seating) {
+        aircraftService.setSeating(id, seating);
+    }
+
+    @GetMapping("/{id}/capacity")
+    public int getCapacity(@PathVariable Long id) {
+        return aircraftService.getCapacity(id);
+    }
+
+    @PutMapping("/{id}/capacity")
+    public void setCapacity(@PathVariable Long id, @RequestBody int capacity) {
+        aircraftService.setCapacity(id, capacity);
+    }
+
+    @PutMapping("/{id}/passengers")
+    public Aircraft addPassengerToAircraft(@PathVariable Long id, @RequestBody Passengers passengers) {
+        passengersService.addPassenger(passengers);
+        passengersService.addAircraftToPassenger(passengers, id);
+        return aircraftService.addPassengerToAircraft(id, passengers);
+    }
+
+    @GetMapping("/{id}/passengers")
+    public List<Passengers> getPassengersForAircraft(@PathVariable Long id) {
+        return aircraftService.getPassengersForAircraft(id);
+    }
+    }
