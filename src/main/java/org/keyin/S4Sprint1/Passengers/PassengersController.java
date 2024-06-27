@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
+import org.keyin.S4Sprint1.Aircraft.AircraftService;
 import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Airports.AirportsService;
 import org.keyin.S4Sprint1.Passengers.*;
 import org.keyin.S4Sprint1.Cities.Cities;
+import org.keyin.S4Sprint1.Cities.CitiesService;
 
 @RestController
 @RequestMapping("/api/passengers")
@@ -16,7 +18,6 @@ public class PassengersController {
     private AirportsService AirportsService;
 
 
-    @Autowired
     public PassengersController(PassengersService passengersService, AirportsService AirportsService) {
         this.passengersService = passengersService;
         this.AirportsService = AirportsService;
@@ -34,63 +35,59 @@ public class PassengersController {
     }
 
     @GetMapping("/{id}")
-    public Passengers getPassengerById(@PathVariable Long id) {
+    public Passengers getPassengerById(@PathVariable int id) {
         return passengersService.getPassengerById(id);
     }
 
-    @GetMapping("/phone/{phoneNumber}")
-    public Passengers getPassengerByPhone(@PathVariable String phoneNumber) {
-        return passengersService.getPassengerByPhone(phoneNumber);
-    }
-
     @PutMapping("/{id}")
-    public Passengers updatePassengers(@PathVariable Long id, @RequestBody Passengers passenger) {
+    public Passengers updatePassengers(@PathVariable int id, @RequestBody Passengers passenger) {
         return passengersService.updatePassengers(id, passenger);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePassenger(@PathVariable Long id) {
+    public void deletePassenger(@PathVariable int id) {
         passengersService.deletePassenger(id);
     }
 
     @GetMapping("/{id}/aircraft")
-    public List<Aircraft> getAircraftsForPassenger(@PathVariable Long id) {
+    public List<Aircraft> getAircraftsForPassenger(@PathVariable int id) {
+        return passengersService.getAircraftForPassenger(id);
+    }
+
+    @PostMapping("/{id}/aircraft/{aircraftId}")
+    public void addAircraftToPassenger(@PathVariable int id, @PathVariable Long aircraftId) {
         Passengers passenger = passengersService.getPassengerById(id);
-        return passengersService.getAircraftForPassenger(passenger);
+        passenger.addAircraft(aircraftId);
     }
 
     @DeleteMapping("/{id}/aircraft/{aircraftId}")
-    public void deleteAircraftFromPassenger(@PathVariable Long id, @PathVariable Long aircraftId) {
+    public void deleteAircraftFromPassenger(@PathVariable int id, @PathVariable Long aircraftId) {
         Passengers passenger = passengersService.getPassengerById(id);
         passengersService.deleteAircraftFromPassenger(passenger, aircraftId);
     }
 
     @GetMapping("/{id}/airport")
-    public List<Airports> getAirportsForPassenger(@PathVariable Long id) {
-        Passengers passenger = passengersService.getPassengerById(id);
-        return passengersService.getAirportsForPassenger(passenger);
+    public List<Airports> getAirportsForPassenger(@PathVariable int id) {
+        return passengersService.getAirportsForPassenger(id);
     }
 
-    @PostMapping("/{id}/airport")
-    public List<Airports> addAirportToPassenger(@PathVariable Long id, @RequestBody Airports airport) {
-        Passengers passenger = passengersService.getPassengerById(id);
-        return passengersService.addAirportToPassenger(passenger, airport);
+    @PostMapping("/{id}/airport/{airportID}")
+    public Airports addAirportToPassenger(@PathVariable int id, @PathVariable int airportID) {
+        return passengersService.addAirportToPassenger(id, airportID);
     }
 
     @DeleteMapping("/{id}/airport/{airportId}")
-    public void deleteAirportFromPassenger(@PathVariable Long id, @PathVariable Long airportId) {
-        Passengers passenger = passengersService.getPassengerById(id);
-        passengersService.deleteAirportFromPassenger(passenger, AirportsService.getAirportById(airportId));
+    public void deleteAirportFromPassenger(@PathVariable int id, @PathVariable int airportID) {
+        passengersService.deleteAirportFromPassenger(id, airportID);
     }
 
     @GetMapping("/{id}/cities")
-    public Cities getCity(@PathVariable Long id) {
-        Passengers passenger = passengersService.getPassengerById(id);
-        return passengersService.getCityForPassenger(passenger);
+    public Cities getCity(@PathVariable int id) {
+        return passengersService.getCityForPassenger(id);
     }
 
-    @PostMapping("/{id}/cities")
-    public void setCity(@PathVariable Long id, @RequestBody Cities city) {
+    @PostMapping("/{id}/cities/{city}")
+    public void setCity(@PathVariable int id, @PathVariable Long city) {
         Passengers passenger = passengersService.getPassengerById(id);
         passenger.setCity(city);
     }

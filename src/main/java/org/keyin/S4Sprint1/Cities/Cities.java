@@ -7,7 +7,6 @@ import org.keyin.S4Sprint1.Passengers.Passengers;
 import java.util.List;
 
 @JsonInclude (JsonInclude.Include.NON_NULL)
-
 public class Cities {
     private Long id;
     private String name;
@@ -26,6 +25,10 @@ public class Cities {
         this.population = population;
         this.airports = airports;
         this.passengers = passengers;
+    }
+
+    public Cities(String name) {
+        this.name = name;
     }
 
     public Long getId() {
