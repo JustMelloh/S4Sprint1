@@ -63,7 +63,7 @@ public class AircraftService {
         return aircraft.getAirports();
     }
 
-    public void deleteAirportFromAircraft(Long id, Long airportId) {
+    public void deleteAirportFromAircraft(Long id, int airportId) {
         Aircraft aircraft = aircraftMap.get(id);
         aircraft.deleteAirport(airportId);
     }
@@ -98,7 +98,7 @@ public class AircraftService {
         return aircraft;
     }
 
-    public void deletePassengerFromAircraft(Long aircraftId, Long passengerId) {
+    public void deletePassengerFromAircraft(Long aircraftId, int passengerId) {
         Aircraft aircraft = aircraftMap.get(aircraftId);
         aircraft.deletePassenger(passengerId);
     }

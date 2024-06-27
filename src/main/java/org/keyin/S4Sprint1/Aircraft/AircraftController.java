@@ -43,8 +43,10 @@ public class AircraftController {
         }
 
         /* Endpoint to add an aircraft*/
-        @PostMapping
-        public Aircraft addAircraft(@RequestBody Aircraft aircraft) {
+        @PostMapping("/{id}")
+        public Aircraft addAircraft(@PathVariable int id, @RequestBody Aircraft aircraft) {
+            Airports airports = airportsService.getAirportById(id);
+            aircraft.addAirport(airports);
             return aircraftService.addAircraft(aircraft);
         }
 
@@ -75,7 +77,7 @@ public class AircraftController {
 
     /* DELETE an airport from a specific aircraft*/
     @DeleteMapping("/{id}/airports/{airportId}")
-    public void deleteAirportFromAircraft(@PathVariable Long id, @PathVariable Long airportId) {
+    public void deleteAirportFromAircraft(@PathVariable Long id, @PathVariable int airportId) {
         aircraftService.deleteAirportFromAircraft(id, airportId);
     }
 
@@ -110,9 +112,4 @@ public class AircraftController {
     public List<Passengers> getPassengersForAircraft(@PathVariable Long id) {
         return aircraftService.getPassengersForAircraft(id);
     }
-    @GetMapping("/{id}/cities")
-    public ResponseEntity<List<Cities>> getCitiesForAirport(@PathVariable Long id) {
-        List<Cities> cities = airportsService.getCitiesForAirport(id);
-        return new ResponseEntity<>(cities, HttpStatus.OK);
     }
-}

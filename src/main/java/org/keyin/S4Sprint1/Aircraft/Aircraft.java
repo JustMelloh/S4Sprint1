@@ -18,7 +18,7 @@ public class Aircraft {
     private Cities city;
     private int seating;
     private int capacity;
-    private List<Airports> airports;
+    private List<Airports> airports = new ArrayList<>();
     private List<Passengers> passengersList = new ArrayList<>();
     /**
      * Default constructor for the Aircraft entity.
@@ -33,13 +33,13 @@ public class Aircraft {
      * @param seating The seating capacity of the aircraft.
      * @param passengersList The number of passengers in the aircraft.
      */
-    public Aircraft(Long aircraftID, Cities city, int seating, List<Passengers> passengersList, int capacity) {
+    public Aircraft(Long aircraftID, Cities city, int seating, List<Passengers> passengersList, int capacity, List<Airports> airports) {
         this.aircraftID = Math.toIntExact(aircraftID);
         this.city = city;
         this.seating = seating;
         this.passengersList = passengersList;
         this.capacity = capacity;
-
+        this.airports = airports;
     }
 
     // Getters and Setters for the Aircraft entity
@@ -79,8 +79,8 @@ public class Aircraft {
      *
      * @param passengerId The ID of the passenger to remove.
      */
-    public void deletePassenger(Long passengerId) {
-        passengersList.removeIf(passenger -> passenger.getId().equals(passengerId));
+    public void deletePassenger(int passengerId) {
+        passengersList.removeIf(passenger -> passenger.getId() == passengerId);
     }
 
     /**
@@ -146,7 +146,7 @@ public class Aircraft {
      * It takes the ID of the airport and removes the corresponding Airports object from the list.
      * @param airportId The ID of the airport to be removed.
      */
-    public void deleteAirport(Long airportId) {
+    public void deleteAirport(int airportId) {
         airports.removeIf(airport -> airport.getAirportID() == airportId);
     }
 
