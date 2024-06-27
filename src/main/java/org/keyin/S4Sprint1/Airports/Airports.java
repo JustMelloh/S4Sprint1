@@ -6,24 +6,25 @@ import org.keyin.S4Sprint1.Cities.Cities;
 import java.util.List;
 public class Airports {
 
-    private int airportID;
+    private Integer airportID;
     private Cities city;
-    private List<Aircraft> aircraft;
+    private List<Aircraft> aircraftID;
 
     public Airports() {
     }
 
-    public Airports(int airportID, Cities city,  List<Aircraft>aircraft) {
+    public Airports(Integer airportID, Cities city,  List<Aircraft>aircraft) {
         this.airportID = airportID;
         this.city = city;
-        this.aircraft = aircraft;
+        this.aircraftID = aircraft;
     }
 
-    public long getAirportID() {
+
+    public Integer getAirportID() {
         return airportID;
     }
 
-    public void setAirportID(int airportID) {
+    public void setAirportID(Integer airportID) {
         this.airportID = airportID;
     }
 
@@ -36,11 +37,11 @@ public class Airports {
     }
 
     public List<Aircraft> getAircraft() {
-        return aircraft;
+        return aircraftID;
     }
 
     public void setAircraft(List<Aircraft> aircraft) {
-        this.aircraft = aircraft;
+        this.aircraftID = aircraft;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class Airports {
         return "Airports{" +
                 "airportID=" + airportID +
                 ", city='" + city + '\'' +
-                ", aircraftID=" + aircraft +
+                ", aircraftID=" + aircraftID +
                 '}';
     }
 }
