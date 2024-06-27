@@ -1,5 +1,8 @@
 package org.keyin.S4Sprint1.Aircraft;
+
 import org.keyin.S4Sprint1.Airports.Airports;
+import org.keyin.S4Sprint1.Airports.AirportsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,6 +15,9 @@ public class AircraftService {
     /* Declaration of a HashMap that will be used to store AirCraft objects. */
     private final Map<Long, Aircraft> aircraftMap = new HashMap<>();
     private Long nextId = 1L;
+
+    @Autowired
+    private AirportsService airportsService;
 
     /* Retrieving all aircraft in airport*/
     public List<Aircraft> getAllAircraft() {
@@ -26,9 +32,19 @@ public class AircraftService {
 
     /* Adding an aircraft*/
 
-    public Aircraft addAircraft(Aircraft aircraft) {
+    public Aircraft addAircraft(Aircraft aircraft, Integer airportID, Airports airports) {
         aircraft.setAircraftID(nextId++);
         aircraftMap.put(aircraft.getAircraftID(), aircraft);
+
+        aircraft.addAirport(airports);
+
+
+        Airports airport = airportsService.getAirportById(airportID);
+        if (airport != null) {
+            airport.addAircraft(aircraft);
+            airportsService.updateAirport(airportID, airport);
+        }
+
         return aircraft;
     }
 
@@ -46,13 +62,6 @@ public class AircraftService {
         aircraftMap.remove(id);
     }
 
-    /* Adding an airport to a specific Aircraft*/
-
-    public Aircraft addAirportToAircraft(Long id, Airports airports) {
-        Aircraft aircraft = aircraftMap.get(id);
-        aircraft.addAirport(airports);
-        return aircraft;
-    }
 
 
     public List<Airports> getAirportsForAircraft(Long id) {

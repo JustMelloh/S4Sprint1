@@ -54,6 +54,8 @@ public class AirportsController {
         return airportsService.addAirport(airport);
     }
 
+
+
     /**
      * This method handles the PUT request to update an existing airport.
      * @param id The ID of the airport to be updated.

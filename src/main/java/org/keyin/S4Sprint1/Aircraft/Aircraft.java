@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Aircraft {
     // Variables representing the properties of an Aircraft
-    private int aircraftID;
+    private Long aircraftID;
     private String city;
     private int seating;
     private List<Airports> airports;
@@ -31,9 +31,10 @@ public class Aircraft {
      * @param passengers The number of passengers in the aircraft.
      */
     public Aircraft(Long aircraftID, String city, int seating, int passengers) {
-        this.aircraftID = Math.toIntExact(aircraftID);
+        this.aircraftID = aircraftID;
         this.city = city;
         this.seating = seating;
+        this.passengers = passengers;
     }
 
     // Getters and Setters for the Aircraft entity
@@ -42,14 +43,14 @@ public class Aircraft {
      * @return The ID of the aircraft.
      */
     public Long getAircraftID() {
-        return (long) aircraftID;
+        return aircraftID;
     }
 
     /**
      * @param aircraftID The ID to set for the aircraft.
      */
     public void setAircraftID(Long aircraftID) {
-        this.aircraftID = Math.toIntExact(aircraftID);
+        this.aircraftID = aircraftID;
     }
 
     /**
@@ -102,6 +103,7 @@ public class Aircraft {
      */
     public void addAirport(Airports airport) {
         airports.add(airport);
+
     }
 
     /**
@@ -111,13 +113,16 @@ public class Aircraft {
         return airports;
     }
 
+    public void setAirports(List<Airports> airports) {
+        this.airports = airports;
+    }
     /**
      * This method removes an airport from the aircraft's list of airports.
      * It takes the ID of the airport and removes the corresponding Airports object from the list.
      * @param airportId The ID of the airport to be removed.
      */
     public void deleteAirport(Long airportId) {
-        airports.removeIf(airport -> airport.getAirportID() == airportId);
+        airports.removeIf(airport -> airport.getAirportID().longValue() == airportId);
     }
 
     /**

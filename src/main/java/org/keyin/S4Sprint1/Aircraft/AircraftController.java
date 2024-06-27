@@ -2,7 +2,7 @@
 
 package org.keyin.S4Sprint1.Aircraft;
 
-
+import org.keyin.S4Sprint1.Airports.AirportsService;
 import org.keyin.S4Sprint1.Airports.Airports;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/aircraft")
 public class AircraftController {
 
         private final AircraftService aircraftService;
@@ -32,9 +33,10 @@ public class AircraftController {
         }
 
         /* Endpoint to add an aircraft*/
-        @PostMapping
-        public Aircraft addAircraft(@RequestBody Aircraft aircraft) {
-            return aircraftService.addAircraft(aircraft);
+        @PostMapping("/{airportID}/add")
+        public Aircraft addAircraft(@PathVariable Airports airports, @PathVariable Integer airportID, @RequestBody Aircraft aircraft) {
+            return aircraftService.addAircraft(aircraft, airportID, airports);
+
         }
 
         /* Endpoint that updates to existing aircraft*/
@@ -51,9 +53,13 @@ public class AircraftController {
 
         /* Adding an airport to a specific Aircraft*/
 
-    @PostMapping("/{id}/airports")
+    @PostMapping("/{id}/airports/addAircraft")
     public Aircraft addAirportToAircraft(@PathVariable Long id, @RequestBody Airports airports) {
-        return aircraftService.addAirportToAircraft(id, airports);
+        Aircraft aircraft = aircraftService.getAircraftById(id);
+        if (aircraft == null) {
+            throw new IllegalArgumentException("Aircraft does not exist");
+        }
+        return aircraftService.addAircraft(aircraft, airports.getAirportID(), airports);
     }
 
     /* GET all airports for a specific aircraft*/
