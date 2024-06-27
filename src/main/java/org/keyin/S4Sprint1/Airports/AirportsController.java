@@ -60,7 +60,7 @@ public class AirportsController {
      * @param airport The updated airport.
      * @return The updated airport.
      */
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Airports updateAirport(@PathVariable int id, @RequestBody Airports airport){
         return airportsService.updateAirport(id, airport);
     }

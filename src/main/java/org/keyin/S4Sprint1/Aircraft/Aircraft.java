@@ -18,8 +18,10 @@ public class Aircraft {
     private Cities city;
     private int seating;
     private int capacity;
-    private List<Airports> airports = new ArrayList<>();
+    private List<Integer> airports = new ArrayList<>();
     private List<Passengers> passengersList = new ArrayList<>();
+    private List<Long> aircrafts = new ArrayList<>();
+
     /**
      * Default constructor for the Aircraft entity.
      */
@@ -33,7 +35,7 @@ public class Aircraft {
      * @param seating The seating capacity of the aircraft.
      * @param passengersList The number of passengers in the aircraft.
      */
-    public Aircraft(Long aircraftID, Cities city, int seating, List<Passengers> passengersList, int capacity, List<Airports> airports) {
+    public Aircraft(Long aircraftID, Cities city, int seating, List<Passengers> passengersList, int capacity, List<Integer> airports) {
         this.aircraftID = Math.toIntExact(aircraftID);
         this.city = city;
         this.seating = seating;
@@ -130,14 +132,14 @@ public class Aircraft {
      * This method is used to add an airport to the aircraft's list of airports.
      * @param airport The airport to be added.
      */
-    public void addAirport(Airports airport) {
+    public void addAirport(Integer airport) {
         airports.add(airport);
     }
 
     /**
      * @return A list of airports associated with the aircraft.
      */
-    public List<Airports> getAirports() {
+    public List<Integer> getAirports() {
         return airports;
     }
 
@@ -147,7 +149,7 @@ public class Aircraft {
      * @param airportId The ID of the airport to be removed.
      */
     public void deleteAirport(int airportId) {
-        airports.removeIf(airport -> airport.getAirportID() == airportId);
+        airports.removeIf(airport -> airport == airportId);
     }
 
     /**
@@ -166,5 +168,6 @@ public class Aircraft {
     public Object getCities() {
         return city;
     }
+
 }
 

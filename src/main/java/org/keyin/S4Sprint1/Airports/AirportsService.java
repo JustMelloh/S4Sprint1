@@ -52,10 +52,10 @@ public class AirportsService {
             List<Aircraft> aircraftList = airport.getAircraft();
             if (aircraftList == null) {
                 aircraftList = new ArrayList<>();
-                airport.setAircraft(aircraftList);
             }
             aircraftList.add(aircraft);
-            // Update the airport in the database
+            airport.setAircraft(aircraftList);
+
             airportsMap.put(id, airport);
         }
         return airport;
