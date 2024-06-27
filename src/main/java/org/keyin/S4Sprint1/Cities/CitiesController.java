@@ -59,5 +59,13 @@ public class CitiesController {
     public Cities addPassengerToCity(@PathVariable Long cityId, @RequestBody Passengers passenger) {
         return citiesService.addPassengerToCity(cityId, passenger);
     }
+
+    // Endpoint to search for cities by name
+    @GetMapping("/search")
+    public List<Cities> searchCitiesByName(@RequestParam String name) {
+        return citiesService.searchCitiesByName(name);
+    }
+
+
 }
 
