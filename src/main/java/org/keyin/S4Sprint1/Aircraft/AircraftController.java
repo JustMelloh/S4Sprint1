@@ -5,10 +5,7 @@ package org.keyin.S4Sprint1.Aircraft;
 
 import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Airports.AirportsService;
-import org.keyin.S4Sprint1.Cities.Cities;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.keyin.S4Sprint1.Passengers.Passengers;
 import org.keyin.S4Sprint1.Passengers.PassengersService;
@@ -43,13 +40,16 @@ public class AircraftController {
         }
 
         /* Endpoint to add an aircraft*/
-        @PostMapping
-        public Aircraft addAircraft(@RequestBody Aircraft aircraft) {
+        @PostMapping("/{id}")
+        public Aircraft addAircraft(@PathVariable int id, @RequestBody Aircraft aircraft) {
+            Airports airports = airportsService.getAirportById(id);
+            aircraft.addAirport(airports.getAirportID());
+            airportsService.addAircraftToAirport(id, aircraft);
             return aircraftService.addAircraft(aircraft);
         }
 
         /* Endpoint that updates to existing aircraft*/
-        @PutMapping("/{id}")
+        @PutMapping("/update/{id}")
         public Aircraft updateAircraft(@PathVariable Long id, @RequestBody Aircraft aircraft) {
             return aircraftService.updateAircraft(id, aircraft);
         }
@@ -64,18 +64,18 @@ public class AircraftController {
 
     @PostMapping("/{id}/airports")
     public Aircraft addAirportToAircraft(@PathVariable Long id, @RequestBody Airports airports) {
-        return aircraftService.addAirportToAircraft(id, airports);
+        return aircraftService.addAirportToAircraft(id, airports.getAirportID());
     }
 
     /* GET all airports for a specific aircraft*/
     @GetMapping("/{id}/airports")
-    public List<Airports> getAirportsForAircraft(@PathVariable Long id) {
+    public List<Integer> getAirportsForAircraft(@PathVariable Long id) {
         return aircraftService.getAirportsForAircraft(id);
     }
 
     /* DELETE an airport from a specific aircraft*/
     @DeleteMapping("/{id}/airports/{airportId}")
-    public void deleteAirportFromAircraft(@PathVariable Long id, @PathVariable Long airportId) {
+    public void deleteAirportFromAircraft(@PathVariable Long id, @PathVariable int airportId) {
         aircraftService.deleteAirportFromAircraft(id, airportId);
     }
 
@@ -110,9 +110,4 @@ public class AircraftController {
     public List<Passengers> getPassengersForAircraft(@PathVariable Long id) {
         return aircraftService.getPassengersForAircraft(id);
     }
-    @GetMapping("/{id}/cities")
-    public ResponseEntity<List<Cities>> getCitiesForAirport(@PathVariable Long id) {
-        List<Cities> cities = airportsService.getCitiesForAirport(id);
-        return new ResponseEntity<>(cities, HttpStatus.OK);
     }
-}

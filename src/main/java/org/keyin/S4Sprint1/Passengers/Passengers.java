@@ -2,19 +2,19 @@ package org.keyin.S4Sprint1.Passengers;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.keyin.S4Sprint1.Airports.*;
-import org.keyin.S4Sprint1.Cities.Cities;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude (JsonInclude.Include.NON_NULL)
 public class Passengers {
-    private Long id;
+    private int id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private List<Long> aircrafts = new ArrayList<>();
-    private List<Airports> airports = new ArrayList<>();
-    private Cities city;
+    private List<Integer> airports = new ArrayList<>();
+    private Long city;
 
-    public Passengers(Long id, String firstName, String lastName, String phoneNumber, List<Long> aircrafts, List<Airports> airports, Cities city) {
+    public Passengers(int id, String firstName, String lastName, String phoneNumber, List<Long> aircrafts, List<Integer> airports, Long city) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,7 +28,7 @@ public class Passengers {
 
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -44,7 +44,7 @@ public class Passengers {
         return phoneNumber;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -68,19 +68,19 @@ public class Passengers {
         aircrafts.add(aircraft);
     }
 
-    public List<Airports> getAirports() {
+    public List<Integer> getAirports() {
         return airports;
     }
 
-    public void addAirport(Airports airport) {
+    public void addAirport(Integer airport) {
         airports.add(airport);
     }
 
-    public Cities getCity() {
+    public Long getCity() {
         return city;
     }
 
-    public void setCity(Cities city) {
+    public void setCity(Long city) {
         this.city = city;
     }
     

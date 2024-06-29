@@ -1,63 +1,56 @@
 package org.keyin.S4Sprint1.Airports;
 
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
-import org.keyin.S4Sprint1.Aircraft.AircraftService;
-import org.keyin.S4Sprint1.Cities.Cities;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * This is the service class for the Airports entity.
- * It handles the business logic for managing airports.
- */
 @Service
 public class AirportsService {
 
     /**
-     * A map to store airports with their IDs as keys.
+     * A map to store all airports, where the key is the airport ID and the value is the airport object.
      */
-    private final Map<Long, Airports> airportsMap = new HashMap<>();
-    private final AircraftService aircraftService;
-
-    public AirportsService(AircraftService aircraftService) {
-        this.aircraftService = aircraftService;
-    }
+    private final Map<Integer, Airports> airportsMap = new HashMap<>();
 
     /**
-     * This method returns all airports.
-     * @return A list of all airports.
+     * Returns a list of all airports.
+     *
+     * @return a list of all airports
      */
     public List<Airports> getAllAirports() {
         return new ArrayList<>(airportsMap.values());
     }
 
     /**
-     * This method returns all aircraft at a specific airport.
-     * @param id The ID of the airport.
-     * @return A list of all aircraft at the specified airport.
+     * Returns a list of all aircraft at a specific airport.
+     *
+     * @param id the ID of the airport
+     * @return a list of all aircraft at the airport
      */
-    public List<Aircraft> getAircraftAtAirport(Long id) {
+    public List<Aircraft> getAircraftAtAirport(Integer id) {
         Airports airport = airportsMap.get(id);
-        return airportsMap.get(id).getAircraft();
+        return airport.getAircraft();
     }
 
     /**
-     * This method returns an airport by its ID.
-     * @param id The ID of the airport.
-     * @return The airport with the given ID.
+     * Returns the airport with the specified ID.
+     *
+     * @param id the ID of the airport
+     * @return the airport with the specified ID
      */
-    public Airports getAirportById(Long id) {
+    public Airports getAirportById(Integer id) {
         return airportsMap.get(id);
     }
 
     /**
-     * This method adds a new airport.
-     * @param airport The airport to be added.
-     * @return The added airport.
-     * @throws IllegalArgumentException If the airport already exists.
+     * Adds a new airport to the map.
+     *
+     * @param airport the airport to add
+     * @return the added airport
+     * @throws IllegalArgumentException if an airport with the same ID already exists
      */
     public Airports addAirport(Airports airport) {
         if (airportsMap.containsKey(airport.getAirportID())) {
@@ -69,46 +62,14 @@ public class AirportsService {
     }
 
     /**
-     * This method adds an airport to a specific aircraft.
-     * @param id The ID of the aircraft.
-     * @param airport The airport to be added to the aircraft.
-     * @return The added airport.
+     * Updates the airport with the specified ID.
+     *
+     * @param id      the ID of the airport to update
+     * @param airport the airport to update
+     * @return the updated airport
+     * @throws IllegalArgumentException if no airport with the specified ID exists
      */
-    public Airports addAirportToAircraft(Long id, Airports airport) {
-        Aircraft aircraft = aircraftService.getAircraftById(id);
-        aircraft.addAirport(airport);
-        return airport;
-    }
-
-    /**
-     * This method updates an existing airport.
-     * @param id The ID of the airport to be updated.
-     * @param airportId The updated airport.
-     * @throws IllegalArgumentException If the airport does not exist.
-     */
-    public void deleteAirportFromAircraft(Long id, Long airportId) {
-        Aircraft aircraft = aircraftService.getAircraftById(id);
-        aircraft.deleteAirport(airportId);
-    }
-
-    /**
-     * This method returns all airports for a specific aircraft.
-     * @param id The ID of the aircraft.
-     * @return A list of all airports for the specified aircraft.
-     */
-    public List<Airports> getAirportsForAircraft(Long id) {
-        Aircraft aircraft = aircraftService.getAircraftById(id);
-        return aircraft.getAirports();
-    }
-
-    /**
-     * This method updates an existing airport.
-     * @param id The ID of the airport to be updated.
-     * @param airport The updated airport.
-     * @return The updated airport.
-     * @throws IllegalArgumentException If the airport does not exist.
-     */
-    public Airports updateAirport(Long id, Airports airport) {
+    public Airports updateAirport(Integer id, Airports airport) {
         if (!airportsMap.containsKey(id)) {
             throw new IllegalArgumentException("Airport does not exist");
         }
@@ -117,17 +78,35 @@ public class AirportsService {
     }
 
     /**
-     * This method deletes an airport.
-     * @param id The ID of the airport to be deleted.
-     * @return A boolean indicating whether the deletion was successful.
+     * Deletes the airport with the specified ID.
+     *
+     * @param id the ID of the airport to delete
+     * @return true if the airport was deleted, false otherwise
      */
-    public boolean deleteAirport(Long id) {
+    public boolean deleteAirport(Integer id) {
         return airportsMap.remove(id) != null;
     }
 
-
-    public List<Cities> getCitiesForAirport(Long id) {
+    /**
+     * Adds an aircraft to the airport with the specified ID.
+     *
+     * @param id       the ID of the airport
+     * @param aircraft the aircraft to add
+     * @return the airport to which the aircraft was added
+     */
+    public Airports addAircraftToAirport(int id, Aircraft aircraft) {
         Airports airport = airportsMap.get(id);
-        return (List<Cities>) airport.getCity();
+        if (airport != null) {
+            List<Aircraft> aircraftList = airport.getAircraft();
+            if (aircraftList == null) {
+                aircraftList = new ArrayList<>();
+            }
+            aircraftList.add(aircraft);
+            airport.setAircraft(aircraftList);
+
+            airportsMap.put(id, airport);
+        }
+        return airport;
+
     }
 }

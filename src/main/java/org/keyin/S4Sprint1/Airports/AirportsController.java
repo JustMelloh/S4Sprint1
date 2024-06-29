@@ -1,10 +1,7 @@
 package org.keyin.S4Sprint1.Airports;
 
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
-import org.keyin.S4Sprint1.Cities.Cities;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -32,7 +29,7 @@ public class AirportsController {
      * This method handles the GET request to fetch all airports.
      * @return A list of all airports.
      */
-    @GetMapping
+    @GetMapping("/all")
     public List<Airports> getAllAirports(){
         return airportsService.getAllAirports();
     }
@@ -43,7 +40,7 @@ public class AirportsController {
      * @return The airport with the given ID.
      */
     @GetMapping("/{id}")
-    public Airports getAirportById(@PathVariable Long id){
+    public Airports getAirportById(@PathVariable int id){
         return airportsService.getAirportById(id);
     }
 
@@ -52,7 +49,7 @@ public class AirportsController {
      * @param airport The airport to be added.
      * @return The added airport.
      */
-    @PostMapping
+    @PostMapping("/add")
     public Airports addAirport(@RequestBody Airports airport){
         return airportsService.addAirport(airport);
     }
@@ -63,8 +60,8 @@ public class AirportsController {
      * @param airport The updated airport.
      * @return The updated airport.
      */
-    @PutMapping("/{id}")
-    public Airports updateAirport(@PathVariable Long id, @RequestBody Airports airport){
+    @PutMapping("/update/{id}")
+    public Airports updateAirport(@PathVariable int id, @RequestBody Airports airport){
         return airportsService.updateAirport(id, airport);
     }
 
@@ -74,31 +71,9 @@ public class AirportsController {
      * @return A boolean indicating whether the deletion was successful.
      */
     @DeleteMapping("/{id}")
-    public boolean deleteAirport(@PathVariable Long id){
+    public boolean deleteAirport(@PathVariable int id){
         return airportsService.deleteAirport(id);
     }
 
-    /**
-     * This method handles the POST request to add an airport to a specific aircraft.
-     * @param id The ID of the aircraft.
-     * @param airport The airport to be added to the aircraft.
-     * @return The updated aircraft.
-     */
-
-    @GetMapping("/aircraft/{id}/airports")
-    public List<Airports> getAirportsForAircraft(@PathVariable Long id){
-        return airportsService.getAirportsForAircraft(id);
-    }
-
-    @DeleteMapping("/aircraft/{id}/airports/{airportId}")
-    public void deleteAirportFromAircraft(@PathVariable Long id, @PathVariable Long airportId){
-        airportsService.deleteAirportFromAircraft(id, airportId);
-    }
-
-
-    @PostMapping("/{id}/airports")
-    public Airports addAirportToAircraft(@PathVariable Long id, @RequestBody Airports airport){
-        return airportsService.addAirportToAircraft(id, airport);
-    }
 
 }

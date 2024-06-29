@@ -1,7 +1,4 @@
 package org.keyin.S4Sprint1.Aircraft;
-import org.keyin.S4Sprint1.Airports.Airports;
-import org.keyin.S4Sprint1.Cities.Cities;
-import org.keyin.S4Sprint1.Cities.CitiesService;
 import org.keyin.S4Sprint1.Passengers.Passengers;
 import org.springframework.stereotype.Service;
 
@@ -51,19 +48,19 @@ public class AircraftService {
 
     /* Adding an airport to a specific Aircraft*/
 
-    public Aircraft addAirportToAircraft(Long id, Airports airports) {
+    public Aircraft addAirportToAircraft(Long id, int airports) {
         Aircraft aircraft = aircraftMap.get(id);
         aircraft.addAirport(airports);
         return aircraft;
     }
 
 
-    public List<Airports> getAirportsForAircraft(Long id) {
+    public List<Integer> getAirportsForAircraft(Long id) {
         Aircraft aircraft = aircraftMap.get(id);
         return aircraft.getAirports();
     }
 
-    public void deleteAirportFromAircraft(Long id, Long airportId) {
+    public void deleteAirportFromAircraft(Long id, int airportId) {
         Aircraft aircraft = aircraftMap.get(id);
         aircraft.deleteAirport(airportId);
     }
@@ -98,7 +95,7 @@ public class AircraftService {
         return aircraft;
     }
 
-    public void deletePassengerFromAircraft(Long aircraftId, Long passengerId) {
+    public void deletePassengerFromAircraft(Long aircraftId, int passengerId) {
         Aircraft aircraft = aircraftMap.get(aircraftId);
         aircraft.deletePassenger(passengerId);
     }
