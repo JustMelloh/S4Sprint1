@@ -37,6 +37,13 @@ public class Airports {
         this.aircraftID = aircraft;
     }
 
+    public Airports(Integer airportID, Cities city,  List<Aircraft>aircraft, List<Passengers> passengers) {
+        this.airportID = airportID;
+        this.city = city;
+        this.aircraftID = aircraft;
+        this.passengersList = passengers != null ? passengers : new ArrayList<>();
+    }
+
     public Airports(int airportID, Cities city, List<Passengers> passengers) {
         this.airportID = airportID;
         this.city = city;
