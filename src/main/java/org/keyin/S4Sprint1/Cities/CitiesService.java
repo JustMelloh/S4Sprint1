@@ -2,7 +2,6 @@ package org.keyin.S4Sprint1.Cities;
 
 import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Passengers.Passengers;
-import org.keyin.S4Sprint1.Passengers.Passengers;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -1,15 +1,12 @@
 package org.keyin.S4Sprint1.Passengers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import java.util.*;
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
-import org.keyin.S4Sprint1.Aircraft.AircraftService;
 import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Airports.AirportsService;
-import org.keyin.S4Sprint1.Passengers.*;
 import org.keyin.S4Sprint1.Cities.Cities;
-import org.keyin.S4Sprint1.Cities.CitiesService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/passengers")

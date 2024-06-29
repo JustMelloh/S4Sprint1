@@ -1,9 +1,9 @@
 package org.keyin.S4Sprint1.CitiesTest;
 
 import org.junit.jupiter.api.Test;
+import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Cities.Cities;
 import org.keyin.S4Sprint1.Cities.CitiesService;
-import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Passengers.Passengers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,7 +19,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
