@@ -1,14 +1,14 @@
 package org.keyin.S4Sprint1.CitiesTest;
 
 import org.junit.jupiter.api.Test;
-import org.keyin.S4Sprint1.Cities.Cities;
 import org.keyin.S4Sprint1.Airports.Airports;
+import org.keyin.S4Sprint1.Cities.Cities;
 import org.keyin.S4Sprint1.Passengers.Passengers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CitiesTest {
 

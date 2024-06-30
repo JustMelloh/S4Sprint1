@@ -1,11 +1,16 @@
 package org.keyin.S4Sprint1.Passengers;
-import org.springframework.stereotype.Service;
-import java.util.*;
+
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
 import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Airports.AirportsService;
-import org.keyin.S4Sprint1.Cities.CitiesService;
 import org.keyin.S4Sprint1.Cities.Cities;
+import org.keyin.S4Sprint1.Cities.CitiesService;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class PassengersService {

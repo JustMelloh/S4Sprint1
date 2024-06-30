@@ -1,20 +1,28 @@
 /* Creating Airport package for the API which allows client-side to view airports, what city.*/
 
 package org.keyin.S4Sprint1.Airports;
+
 import org.keyin.S4Sprint1.Aircraft.Aircraft;
 import org.keyin.S4Sprint1.Cities.Cities;
+import org.keyin.S4Sprint1.Passengers.Passengers;
+
+
+import java.util.ArrayList;
 import java.util.List;
 public class Airports {
 
     private Integer airportID;
     private Cities city;
     private List<Aircraft> aircraftID;
+    private List<Passengers> passengersList = new ArrayList<>();
 
     /**
      * Default constructor for the Airports class.
      */
     public Airports() {
     }
+
+
 
     /**
      * Constructs an Airports object with the given airport ID, city, and list of aircraft.
@@ -27,6 +35,12 @@ public class Airports {
         this.airportID = airportID;
         this.city = city;
         this.aircraftID = aircraft;
+    }
+
+    public Airports(int airportID, Cities city, List<Passengers> passengers) {
+        this.airportID = airportID;
+        this.city = city;
+        this.passengersList = passengers != null ? passengers : new ArrayList<>();
     }
 
     /**
@@ -74,6 +88,10 @@ public class Airports {
         return aircraftID;
     }
 
+    public void addAircraft(Aircraft aircraft) {
+        this.aircraftID.add(aircraft);
+        aircraft.setCity(this.getCity());
+    }
     /**
      * Sets the list of aircraft at the airport.
      *
@@ -82,6 +100,19 @@ public class Airports {
     public void setAircraft(List<Aircraft> aircraft) {
         this.aircraftID = aircraft;
     }
+    public void setAircraftID(Aircraft aircraft) {
+    }
+
+    public void addPassenger(Passengers passenger) {
+        this.passengersList.add(passenger);
+        passenger.getAirports().add(this.airportID);
+    }
+
+    public List<Passengers> getPassengers() {
+        return passengersList;
+    }
+
+
 
     /**
      * Returns a string representation of the Airports object.
@@ -92,8 +123,10 @@ public class Airports {
     public String toString() {
         return "Airports{" +
                 "airportID=" + airportID +
-                ", city='" + city + '\'' +
+                ", city='" + city.getName() + '\'' +
                 ", aircraftID=" + aircraftID +
                 '}';
     }
+
+
 }

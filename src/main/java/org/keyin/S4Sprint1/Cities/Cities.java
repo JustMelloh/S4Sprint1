@@ -1,9 +1,9 @@
 package org.keyin.S4Sprint1.Cities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import org.keyin.S4Sprint1.Airports.Airports;
 import org.keyin.S4Sprint1.Passengers.Passengers;
+
 import java.util.List;
 
 @JsonInclude (JsonInclude.Include.NON_NULL)
@@ -14,6 +14,8 @@ public class Cities {
     private int population;
     private List<Airports> airports;
     private List<Passengers> passengers;
+
+
 
     // Constructor, getters, and setters
     public Cities() {}
@@ -77,5 +79,16 @@ public class Cities {
 
     public void setPassengers(List<Passengers> passengers) {
         this.passengers = passengers;
+    }
+
+    public void addAirport(Airports airport) {
+        this.airports.add(airport);
+        airport.setCity(this);
+    }
+
+    public void addPassenger(Passengers passenger) {
+        this.passengers.add(passenger);
+        passenger.setCity(this.getId());
+
     }
 }

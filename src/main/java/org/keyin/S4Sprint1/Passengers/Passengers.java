@@ -1,8 +1,10 @@
 package org.keyin.S4Sprint1.Passengers;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.keyin.S4Sprint1.Airports.Airports;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude (JsonInclude.Include.NON_NULL)
 public class Passengers {
@@ -13,6 +15,7 @@ public class Passengers {
     private List<Long> aircrafts = new ArrayList<>();
     private List<Integer> airports = new ArrayList<>();
     private Long city;
+
 
     public Passengers(int id, String firstName, String lastName, String phoneNumber, List<Long> aircrafts, List<Integer> airports, Long city) {
         this.id = id;
@@ -83,5 +86,22 @@ public class Passengers {
     public void setCity(Long city) {
         this.city = city;
     }
-    
+
+    public String getPassengerID() {
+        return null;
+    }
+
+    public String getPhone() {
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Passengers{" +
+                "passengerID=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }
