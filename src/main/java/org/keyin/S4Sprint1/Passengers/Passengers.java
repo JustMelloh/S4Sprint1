@@ -27,6 +27,21 @@ public class Passengers {
         this.city = city;
     }
 
+    public Passengers(String firstName, String lastName, String phoneNumber, List<Long> aircrafts, List<Integer> airports, Long city) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.aircrafts = aircrafts;
+        this.airports = airports;
+        this.city = city;
+    }
+
+    public Passengers(String firstName, String lastName, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Passengers() {
 
     }

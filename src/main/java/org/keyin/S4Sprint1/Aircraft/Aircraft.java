@@ -44,6 +44,12 @@ public class Aircraft {
         this.airports = airports;
     }
 
+    public Aircraft(Cities city, int seating, int capacity) {
+        this.city = city;
+        this.seating = seating;
+        this.capacity = capacity;
+    }
+
     // Getters and Setters for the Aircraft entity
 
     /**
