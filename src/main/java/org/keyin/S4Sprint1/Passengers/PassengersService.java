@@ -88,9 +88,8 @@ public class PassengersService {
         passengers.getAircrafts().remove(aircraftId);
     }
 
-    public void deleteAirportFromPassenger(int id, int airport) {
-        Passengers passenger = getPassengerById(id);
-        passenger.getAirports().remove(airport);
+    public void deleteAirportFromPassenger(Passengers passengers, Integer airport) {
+        passengers.getAirports().remove(airport);
     }
 
     public Cities getCityForPassenger(int id) {

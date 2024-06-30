@@ -73,9 +73,10 @@ public class PassengersController {
         return passengersService.addAirportToPassenger(id, airportID);
     }
 
-    @DeleteMapping("/{id}/airport/{airportId}")
+    @DeleteMapping("/{id}/airport/{airportID}")
     public void deleteAirportFromPassenger(@PathVariable int id, @PathVariable int airportID) {
-        passengersService.deleteAirportFromPassenger(id, airportID);
+        Passengers passenger = passengersService.getPassengerById(id);
+        passengersService.deleteAirportFromPassenger(passenger, airportID);
     }
 
     @GetMapping("/{id}/cities")
