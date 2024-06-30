@@ -36,6 +36,12 @@ public class Passengers {
         this.city = city;
     }
 
+    public Passengers(String firstName, String lastName, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Passengers() {
 
     }

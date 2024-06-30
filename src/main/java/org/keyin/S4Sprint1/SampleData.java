@@ -58,11 +58,11 @@ public class SampleData {
         aircraftService.addAircraft(aircraft4);
         aircraftService.addAircraft(aircraft5);
 
-        Passengers passenger1 = new Passengers("John", "Doe", "7097463612", null, null, null);
-        Passengers passenger2 = new Passengers("Jane", "Doe", "7097463613", null, null, null);
-        Passengers passenger3 = new Passengers("John", "Smith", "7097463614", null, null, null);
-        Passengers passenger4 = new Passengers("Jane", "Smith", "7097463615", null, null, null);
-        Passengers passenger5 = new Passengers("John", "Johnson", "7097463616", null, null, null);
+        Passengers passenger1 = new Passengers("John", "Doe", "7097463612");
+        Passengers passenger2 = new Passengers("Jane", "Doe", "7097463613");
+        Passengers passenger3 = new Passengers("John", "Smith", "7097463614");
+        Passengers passenger4 = new Passengers("Jane", "Smith", "7097463615");
+        Passengers passenger5 = new Passengers("John", "Johnson", "7097463616");
 
         passengersService.addPassenger(passenger1);
         passengersService.addPassenger(passenger2);
